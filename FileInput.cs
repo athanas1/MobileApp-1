@@ -6,9 +6,13 @@ public class FileInput{
 
     public FileInput (string FileName){
         this.FileName = FileName;
-         if (!File.Exists(FileName)){
-        File.Create(FileName).Dispose();
-        sr = new StreamReader(FileName, false);
+        using( var stream = File.Open(FileName, FileMode.Open)){
+        try{
+            sr = new StreamReader(FileName);
+        } catch(FileNotFoundException e)
+        {
+            System.Console.WriteLine("File Open Error:" + FileName + " " + e);
+        }
         }
     }
 

@@ -7,9 +7,16 @@ public class FileOutput{
 
     public FileOutput (string FileName){
         this.FileName = FileName;
-        if (!File.Exists(FileName)){
-        File.Create(FileName).Dispose();
-        sw = new StreamWriter(FileName, false);
+        using( var stream = File.Open(FileName, FileMode.Open)){
+            try{
+                sw = new StreamWriter(FileName);
+            } catch(FileNotFoundException e)
+            {
+                System.Console.WriteLine("File Open Error:" + FileName + " " + e);
+            } catch(Exception e){
+            System.Console.WriteLine("oops" + e);
+            }
+            
         }
     }
 
@@ -19,20 +26,22 @@ public class FileOutput{
                     sw.Write(line + "\n");
                 } catch (Exception e) {
                     Console.WriteLine("File Write Error: " + FileName + " " + e);
-                }
+             
+               }
+               sw.Close();
             }
             
     }
 
-    // public void FileClose() {
-    //     using( var stream = File.Open(FileName, FileMode.Open)){
-    //         if (sw != null) {
-    //             try {
-    //                 sw.Close();
-    //             } catch (IOException e) {
-    //                 e.ToString();
-    //             }
-    //         }
-    //     }
-    // }
+    public void FileClose() {
+        
+            if (sw != null) {
+                try {
+                    sw.Close();
+                } catch (IOException e) {
+                    e.ToString();
+                }
+            }
+        }
+    
 }

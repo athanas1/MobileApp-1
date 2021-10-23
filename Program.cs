@@ -6,8 +6,8 @@ namespace MobileApp_1
 {
     class Program
     {
-            private static FileOutput OutFile = new FileOutput("animals.txt");
-            private static FileInput InFile = new FileInput("animals.txt");
+            private static FileOutput OutFile = new FileOutput("../MobileApp-1/animals.txt");
+            private static FileInput InFile = new FileInput("../MobileApp-1/animals.txt");
         static void Main(string[] args)
         {
             List<Talkable> Zoo = new List<Talkable>();
@@ -19,11 +19,11 @@ namespace MobileApp_1
             foreach(var a in Zoo){
                 printOut(a);
             }
-            //OutFile.FileClose();
+            OutFile.FileClose();
             InFile.FileRead();
             InFile.fileClose();
 
-            FileInput InData = new FileInput("animals.txt");
+            FileInput InData = new FileInput("../MobileApp-1/animals.txt");
             string Line;
             while((Line = InData.fileReadLine()) != null){
                 System.Console.WriteLine(Line);
@@ -31,7 +31,7 @@ namespace MobileApp_1
         }
         public static void printOut(Talkable p) {
         Console.WriteLine(p.GetName() + " says=" + p.Talk());
-        //OutFile.fileWrite(p.GetName() + " | " + p.Talk());
+        OutFile.fileWrite(p.GetName() + " | " + p.Talk());
         
     }
     }
