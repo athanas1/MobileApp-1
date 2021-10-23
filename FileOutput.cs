@@ -21,17 +21,17 @@ public class FileOutput{
     }
 
         public void fileWrite(string line) {
-            using( var stream = File.Open(FileName, FileMode.Open)){
-                try {
-                    sw.Write(line + "\n");
-                } catch (Exception e) {
-                    Console.WriteLine("File Write Error: " + FileName + " " + e);
-             
-               }
-               sw.Close();
-            }
-            
+        try
+        {
+            sw.Write(line + "\n");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("File Write Error: " + FileName + " " + e);
+        }
     }
+
+
 
     public void FileClose() {
         
